@@ -21,7 +21,7 @@ let displayIssues = function(issues) {
             typeEl.textContent = "(Pull request)";
         } else {
             typeEl.textContent = "(issues)";
-        }
+        } 
         issueEl.appendChild(typeEl);
         issuesContainer.appendChild(issueEl);
     }
@@ -33,6 +33,10 @@ let getRepoIssues = function(repo) {
         if(response.ok) {
             response.json().then(function(data) {
                 displayIssues(data);
+
+                if(response.headers.get("Link")) {
+                    console.log("repo has more than 30 issues");
+                }
             })
         } else {
             alert("There was a problem with your request!");
