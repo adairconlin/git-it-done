@@ -1,5 +1,6 @@
 let issuesContainer = document.querySelector("#issues-container");
 let limitWarningEl = document.querySelector("#limit-warning");
+let repoNameEl = document.querySelector("#repo-name");
 
 let displayWarning = function(repo) {
     limitWarningEl.textContent = "To see more than 30 issues, visit ";
@@ -55,4 +56,11 @@ let getRepoIssues = function(repo) {
     });
 };
 
-getRepoIssues("facebook/react");
+let getRepoName = function() {
+    let queryString = document.location.search;
+    let repoName = queryString.split("=")[1];
+    getRepoIssues(repoName);
+    repoNameEl.textContent = repoName;
+};
+
+getRepoName();
